@@ -9,5 +9,21 @@ const getPlayerChoice = () => {
     return playerChoice.toLowerCase();
 }
 
+const playRound = (computerChoice, playerChoice) => {
+    if (computerChoice === 'rock' && playerChoice === 'scissors') {
+        return 'You Lose! ' + `${computerChoice} beats ${playerChoice}`
+    } else if (computerChoice === 'rock' && playerChoice === 'paper') {
+        return 'You Win! ' + `${playerChoice} beats ${computerChoice}`
+    } else if (computerChoice === 'paper' && playerChoice === 'scissors') {
+        return 'You Win! ' + `${playerChoice} beats ${computerChoice}`
+    } else if (computerChoice === 'scissors' && playerChoice === 'paper') {
+        return 'You Lose! ' + `${computerChoice} beats ${playerChoice}`
+    } else {
+        return 'same choice';
+    }
+}
 
-console.log(getPlayerChoice());
+const computerChoice = getComputerChoice();
+const playerChoice = getPlayerChoice();
+
+console.log(playRound(computerChoice, playerChoice));
