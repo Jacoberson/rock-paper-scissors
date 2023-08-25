@@ -10,20 +10,25 @@ const getPlayerChoice = () => {
 }
 
 const playRound = (computerChoice, playerChoice) => {
-    if (computerChoice === 'rock' && playerChoice === 'scissors') {
+    if ((computerChoice === 'rock' && playerChoice === 'scissors') ||
+        (computerChoice === 'scissors' && playerChoice === 'paper') ||
+        (computerChoice === 'paper' && playerChoice === 'rock')) {
         return 'You Lose! ' + `${computerChoice} beats ${playerChoice}`
-    } else if (computerChoice === 'rock' && playerChoice === 'paper') {
+    } else if ((computerChoice === 'rock' && playerChoice === 'paper') ||
+        (computerChoice === 'paper' && playerChoice === 'scissors') ||
+        (computerChoice === 'scissors' && playerChoice === 'rock')) {
         return 'You Win! ' + `${playerChoice} beats ${computerChoice}`
-    } else if (computerChoice === 'paper' && playerChoice === 'scissors') {
-        return 'You Win! ' + `${playerChoice} beats ${computerChoice}`
-    } else if (computerChoice === 'scissors' && playerChoice === 'paper') {
-        return 'You Lose! ' + `${computerChoice} beats ${playerChoice}`
     } else {
-        return 'same choice';
+        return 'You Tie!';
     }
 }
 
-const computerChoice = getComputerChoice();
-const playerChoice = getPlayerChoice();
+const game = () => {
+    for (let i = 0; i < 5; i++) {
+        const computerChoice = getComputerChoice();
+        const playerChoice = getPlayerChoice();
+        console.log(playRound(computerChoice, playerChoice));
+    }
+}
 
-console.log(playRound(computerChoice, playerChoice));
+game();
