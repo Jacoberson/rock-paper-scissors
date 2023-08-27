@@ -8,6 +8,11 @@ const getComputerChoice = () => {
 }
 
 const playRound = (computerChoice, playerChoice) => {
+    makeVisible('computer_score')
+    makeVisible('player_score')
+    makeVisible('computer_choice')
+    makeVisible('player_choice')
+
     if ((computerChoice === 'rock' && playerChoice === 'scissors') ||
         (computerChoice === 'scissors' && playerChoice === 'paper') ||
         (computerChoice === 'paper' && playerChoice === 'rock')) {
@@ -54,11 +59,15 @@ const endGame = () => {
 const restartGame = () => {
     const buttons = document.querySelectorAll('.choice');
     const choices = document.querySelectorAll('.player_choice');
+    const scores = document.querySelectorAll('.player_score')
     buttons.forEach(button => {
         makeVisible(button.id);
     })
     choices.forEach(choice => {
         makeInvisible(choice.id);
+    })
+    scores.forEach(score => {
+        makeInvisible(score.id);
     })
     makeInvisible('winner');
     computerScore = 0;
@@ -81,36 +90,19 @@ buttons.forEach(button => {
     })
 })
 
-const container = document.querySelector('#container')
-const div = document.createElement('div');
-container.appendChild(div);
-
 const restartGameButton = document.querySelector('#restart_game');
 restartGameButton.addEventListener('click', () => {
     restartGame();
 })
 
-const computerScoreOutput = document.createElement('p');
-computerScoreOutput.setAttribute('id', 'computer_score');
+const computerScoreOutput = document.querySelector('#computer_score');
 computerScoreOutput.textContent = `Computer Score: ${computerScore}`;
 
-const computerChoiceOutput = document.createElement('p');
-computerChoiceOutput.setAttribute('id', 'computer_choice');
-computerChoiceOutput.setAttribute('class', 'player_choice');
+const computerChoiceOutput = document.querySelector('#computer_choice');
 
-const playerScoreOutput = document.createElement('p');
-playerScoreOutput.setAttribute('id', 'player_score');
+const playerScoreOutput = document.querySelector('#player_score');
 playerScoreOutput.textContent = `Player Score: ${playerScore}`;
 
-const playerChoiceOutput = document.createElement('p');
-playerChoiceOutput.setAttribute('id', 'player_choice');
-playerChoiceOutput.setAttribute('class', 'player_choice');
+const playerChoiceOutput = document.querySelector('#player_choice');
 
-const winnerOutput = document.createElement('p');
-winnerOutput.setAttribute('id', 'winner');
-
-div.appendChild(computerScoreOutput);
-div.appendChild(computerChoiceOutput);
-div.appendChild(playerScoreOutput);
-div.appendChild(playerChoiceOutput);
-div.appendChild(winnerOutput);
+const winnerOutput = document.querySelector('#winner');
