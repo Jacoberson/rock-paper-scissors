@@ -1,3 +1,6 @@
+let computerScore = 0;
+let playerScore = 0;
+
 const getComputerChoice = () => {
     let options = ['rock', 'paper', 'scissors'];
 
@@ -13,22 +16,34 @@ const playRound = (computerChoice, playerChoice) => {
     if ((computerChoice === 'rock' && playerChoice === 'scissors') ||
         (computerChoice === 'scissors' && playerChoice === 'paper') ||
         (computerChoice === 'paper' && playerChoice === 'rock')) {
-        return 'You Lose! ' + `${computerChoice} beats ${playerChoice}`
+        computerScore++;
     } else if ((computerChoice === 'rock' && playerChoice === 'paper') ||
         (computerChoice === 'paper' && playerChoice === 'scissors') ||
         (computerChoice === 'scissors' && playerChoice === 'rock')) {
-        return 'You Win! ' + `${playerChoice} beats ${computerChoice}`
-    } else {
-        return 'You Tie!';
-    }
+        playerScore++;
+    } 
+    document.getElementById('computer_score').textContent = `Computer Score: ${computerScore}`
+    document.getElementById('player_score').textContent = `Player Score: ${playerScore}`
 }
 
-const game = () => {
-    for (let i = 0; i < 5; i++) {
-        const computerChoice = getComputerChoice();
-        const playerChoice = getPlayerChoice();
-        console.log(playRound(computerChoice, playerChoice));
-    }
-}
+const buttons = document.querySelectorAll('button');
+buttons.forEach(button => {
+    button.addEventListener('click', () => {
+        playRound(getComputerChoice(), button.id);
+    })
+})
 
-game();
+const container = document.querySelector('#container')
+const div = document.createElement('div');
+container.appendChild(div);
+
+const computerScoreOutput = document.createElement('p');
+computerScoreOutput.setAttribute('id', 'computer_score')
+computerScoreOutput.textContent = `Computer Score: ${computerScore}`
+
+const playerScoreOutput = document.createElement('p');
+playerScoreOutput.setAttribute('id', 'player_score');
+playerScoreOutput.textContent = `Player Score: ${playerScore}`
+
+div.appendChild(computerScoreOutput);
+div.appendChild(playerScoreOutput);
