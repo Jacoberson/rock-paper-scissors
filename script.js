@@ -46,24 +46,32 @@ const endGame = () => {
     const buttons = document.querySelectorAll('.choice');
     // make buttons invisible so player cannot continue playing
     buttons.forEach(button => {
-        document.getElementById(button.id).style.visibility = 'hidden';
+        makeInvisible(button.id);
     })
-    document.getElementById('winner').style.visibility = 'visible';
+    makeVisible('winner');
 }
 
 const restartGame = () => {
     const buttons = document.querySelectorAll('.choice');
     const choices = document.querySelectorAll('.player_choice');
     buttons.forEach(button => {
-        document.getElementById(button.id).style.visibility = 'visible';
+        makeVisible(button.id);
     })
     choices.forEach(choice => {
-        document.getElementById(choice.id).style.visibility = 'hidden';
+        makeInvisible(choice.id);
     })
-    document.getElementById('winner').style.visibility = 'hidden';
+    makeInvisible('winner');
     computerScore = 0;
     playerScore = 0;
     updateScore();
+}
+
+const makeVisible = id => {
+    document.getElementById(id).style.visibility = 'visible';
+}
+
+const makeInvisible = id => {
+    document.getElementById(id).style.visibility = 'hidden';
 }
 
 const buttons = document.querySelectorAll('.choice');
