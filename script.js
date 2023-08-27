@@ -48,7 +48,7 @@ const endGame = () => {
     buttons.forEach(button => {
         document.getElementById(button.id).style.visibility = 'hidden';
     })
-    document.getElementById('restart_button').style.visibility = 'visible';
+    document.getElementById('winner').style.visibility = 'visible';
 }
 
 const restartGame = () => {
@@ -58,14 +58,15 @@ const restartGame = () => {
         document.getElementById(button.id).style.visibility = 'visible';
     })
     choices.forEach(choice => {
-        document.getElementById(choice.id).style.visibility = 'invisible';
+        document.getElementById(choice.id).style.visibility = 'hidden';
     })
+    document.getElementById('winner').style.visibility = 'hidden';
     computerScore = 0;
     playerScore = 0;
     updateScore();
 }
 
-const buttons = document.querySelectorAll('button');
+const buttons = document.querySelectorAll('.choice');
 buttons.forEach(button => {
     button.addEventListener('click', () => {
         playRound(getComputerChoice(), button.id);
@@ -76,14 +77,10 @@ const container = document.querySelector('#container')
 const div = document.createElement('div');
 container.appendChild(div);
 
-const restartGameButton = document.createElement('button');
-restartGameButton.setAttribute('id', 'restart_button');
-restartGameButton.style.visibility = 'hidden';
-restartGameButton.textContent = 'Restart Game';
+const restartGameButton = document.querySelector('#restart_game');
 restartGameButton.addEventListener('click', () => {
     restartGame();
 })
-container.appendChild(restartGameButton);
 
 const computerScoreOutput = document.createElement('p');
 computerScoreOutput.setAttribute('id', 'computer_score');
